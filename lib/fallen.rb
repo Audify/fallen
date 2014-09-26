@@ -35,7 +35,7 @@ module Fallen
   # path is given.
   def stdin path
     @stdin = File.absolute_path(path)
-    STDIN.reopen @stdin
+    STDOUT.reopen(File.open(@stdin, 'w+'))
   end
 
   # Reopens `STDOUT` for writing to `path`
@@ -55,7 +55,7 @@ module Fallen
   # path is given.
   def stderr path
     @stderr = File.absolute_path(path)
-    STDERR.reopen @stderr, "a"
+    STDOUT.reopen(File.open(@stderr, 'w+'))
     STDERR.sync = true
   end
 

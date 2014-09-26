@@ -44,7 +44,8 @@ module Fallen
   # path is given.
   def stdout path
     @stdout = File.absolute_path(path)
-    STDOUT.reopen @stdout, "a"
+    STDOUT.reopen(File.open(@stdout, 'w+'))
+    # STDOUT.reopen @stdout, "a"
     STDOUT.sync = true
   end
 
